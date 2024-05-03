@@ -1,18 +1,42 @@
 const coordinates = [2, 4];
-
-function fetchWall() {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', '../json/wallCoords.json');
-  xhr.onreadystatechange = function() {
-    if(xhr.readyState === 4  && xhr.status === 200) {
-      let ret = JSON.parse(xhr.responseText);
-      return ret;
-    }
-  }
-  xhr.send()
-}
-
-const wallCoords = fetchWall()
+const wallCoords = [
+  [0, 0],
+  [0, 1],
+  [0, 2],
+  [0, 3],
+  [0, 4],
+  [0, 5],
+  [0, 6],
+  [0, 7],
+  [0, 8],
+  [0, 9],
+  [9, 0],
+  [9, 1],
+  [9, 2],
+  [9, 3],
+  [9, 4],
+  [9, 5],
+  [9, 6],
+  [9, 7],
+  [9, 8],
+  [9, 9],
+  [1, 0],
+  [1, 9],
+  [2, 0],
+  [2, 9],
+  [3, 0],
+  [3, 9],
+  [4, 0],
+  [4, 9],
+  [5, 0],
+  [5, 9],
+  [6, 0],
+  [6, 9],
+  [7, 0],
+  [7, 9],
+  [8, 0],
+  [8, 9]
+];
 
 let column;
 let row;
@@ -62,41 +86,10 @@ function find() {
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
-/* function tryMove(dir) {
-  let toIncr = 0;
-  if(dir == 'up') {
-      if(coordinates[0] > 0) {
-        column.style = "background-color: black;";
-        coordinates[0] -= 1
-        find()
-      }
-  } else if(dir == 'down') {
-      if(coordinates[0] < 9) {
-        column.style = "background-color: black;";
-        coordinates[0] += 1
-        find()
-      }
-  } else if(dir == 'left') {
-      if(coordinates[1] > 0) {
-        column.style = "background-color: black;";
-        coordinates[1] -= 1
-        find()
-      }
-  } else if(dir == 'right') {
-      if(coordinates[1] < 9) {
-        column.style = "background-color: black;";
-        coordinates[1] += 1
-        find()
-      }
-  }
-} */
-
 function tryMove(dir) {
   let nextX = coordinates[0];
   let nextY = coordinates[1];
 
-  // Calculate next position based on direction
   if (dir === "up") {
     nextX -= 1;
   } else if (dir === "down") {
@@ -107,26 +100,21 @@ function tryMove(dir) {
     nextY += 1;
   }
 
-  // Check for wall collision
   if (!checkWallCollision(nextX, nextY)) {
-    // No collision, move player
-    column.style = "background-color: black;"; // Clear current position
+    column.style = "background-color: black;";
     coordinates[0] = nextX;
     coordinates[1] = nextY;
-    find(); // Update player's position on the grid
+    find();
   }
 }
 
-// Function to check for wall collision
 function checkWallCollision(nextX, nextY) {
-  // Loop through wall coordinates
   for (let i = 0; i < wallCoords.length; i++) {
-    // Check if next position overlaps with any wall coordinates
     if (wallCoords[i][0] === nextX && wallCoords[i][1] === nextY) {
-      return true; // Collision detected
+      return true;
     }
   }
-  return false; // No collision detected
+  return false;
 }
 
 document.onkeypress = (e) => {
