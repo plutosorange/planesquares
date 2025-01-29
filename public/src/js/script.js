@@ -1,6 +1,6 @@
 const coordinates = [0, 1, 1]
 let gameMap
-fetch("./src/map.json")
+fetch("../map.json")
   .then(response => response.json())
   .then(data => {
     gameMap = data;
