@@ -1,4 +1,5 @@
 const coordinates = [0, 1, 1]
+let gameMap
 fetch("./src/map.json")
   .then(response => response.json())
   .then(data => {
@@ -13,13 +14,14 @@ let wallNegX = 5
 let wallPosX = 0
     
 function initMap() {
-    for(let y = 0; y < 9; y++) {
-        for(let x = 0; x < 9; x++) {
-          gameMap[y][x].push(Math.floor(Math.random() * 8) + 1)
-        }
+  for(let y = 0; y < 9; y++) {
+    for(let x = 0; x < 9; x++) {
+      gameMap[y][x].push(Math.floor(Math.random() * 8) + 1)
     }
-    alert(JSON.stringify(map))
+  }
+  alert(JSON.stringify(gameMap))
 }
+
 function displayErase() {}
 function findH() {
   for(let y = 0; y < 9; y++) {
@@ -59,21 +61,10 @@ function findH() {
   }
 }
 function find() {
-  for (let i = 0; i <= coordinates[0]; i++) {
-    if (i == coordinates[0]) {
-      row = document.getElementById(i)
-      rowID = i
-      console.log(i)
-      for (let j = 0; j <= coordinates[1]; j++) {
-        if (j == coordinates[1]) {
-          column = document.getElementById(rowID.toString() + j)
-          columnID = rowID.toString() + j
-          console.log(j)
-        }
-      }
-      column.style = "background-color: red;";
-    }
-  }
+  const rowID = coordinates[0];
+  const columnID = coordinates[1];
+  column = document.getElementById(rowID.toString() + columnID);
+  if (column) column.style.backgroundColor = "red";
 }
 
 function sleep(ms) {
@@ -112,11 +103,6 @@ function tryMove(dir) {
 document.onkeypress = (e) => {
   console.log(e.keyCode)
   if (e.keyCode == 115) {
-    /*if(coordinates[0] < 5) {
-      column.style = "background-color: black;";
-    coordinates[0] += 1
-    find()
-    }*/
     tryMove('down')
   }
   if (e.keyCode == 119) {
