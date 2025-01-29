@@ -1,147 +1,144 @@
-const coordinates = [2, 4];
-const wallCoords = [
-  [0, 0],
-  [0, 1],
-  [0, 2],
-  [0, 3],
-  [0, 4],
-  [0, 5],
-  [0, 6],
-  [0, 7],
-  [0, 8],
-  [0, 9],
-  [9, 0],
-  [9, 1],
-  [9, 2],
-  [9, 3],
-  [9, 4],
-  [9, 5],
-  [9, 6],
-  [9, 7],
-  [9, 8],
-  [9, 9],
-  [1, 0],
-  [1, 9],
-  [2, 0],
-  [2, 9],
-  [3, 0],
-  [3, 9],
-  [4, 0],
-  [4, 9],
-  [5, 0],
-  [5, 9],
-  [6, 0],
-  [6, 9],
-  [7, 0],
-  [7, 9],
-  [8, 0],
-  [8, 9]
-];
-
-let column;
-let row;
-let columnID;
-let rowID;
-let wallNegX = 5;
-let wallPosX = 0;
-
-function findW() {
-  let wallY;
-  let wallX;
-  let coordinate;
-  for (let i = 0; i <= wallCoords.length; i++) {
-    for (let j = 0; j <= wallCoords[i][0]; j++) {
-      if (j == wallCoords[i][0]) {
-        wallY = j;
+const coordinates = [0, 1, 1]
+fetch("./src/map.json")
+  .then(response => response.json())
+  .then(data => {
+    gameMap = data;
+    initMap();
+  });
+let column
+let row
+let columnID
+let rowID
+let wallNegX = 5
+let wallPosX = 0
+    
+function initMap() {
+    for(let y = 0; y < 9; y++) {
+        for(let x = 0; x < 9; x++) {
+          gameMap[y][x].push(Math.floor(Math.random() * 8) + 1)
+        }
+    }
+    alert(JSON.stringify(map))
+}
+function displayErase() {}
+function findH() {
+  for(let y = 0; y < 9; y++) {
+    rowID = y
+    for(let x = 0; x < 9; x++) {
+      column = document.getElementById(rowID.toString() + x)
+      switch (gameMap[y][x][0]) {
+        case 0:
+          column.style = "background-color: #000"
+          break;
+        case 1:
+          column.style = "background-color: #222"
+          break;
+        case 2:
+          column.style = "background-color: #444"
+          break;
+        case 3:
+          column.style = "background-color: #666"
+          break;
+        case 4:
+          column.style = "background-color: #888"
+          break;
+        case 5:
+          column.style = "background-color: #aaa"
+          break;
+        case 6:
+          column.style = "background-color: #ccc"
+          break;
+        case 7:
+          column.style = "background-color: #eee"
+          break;
+        case 8:
+          column.style = "background-color: #fff"
+          break;
       }
     }
-    for (let j = 0; j <= wallCoords[i][1]; j++) {
-      if (j == wallCoords[i][1]) {
-        wallX = j;
-      }
-    }
-    coordinate = wallY.toString() + wallX.toString();
-    let locolumn = document.getElementById(coordinate);
-    locolumn.style = "background-color: gray;";
   }
 }
 function find() {
   for (let i = 0; i <= coordinates[0]; i++) {
     if (i == coordinates[0]) {
-      row = document.getElementById(i);
-      rowID = i;
-      console.log(i);
+      row = document.getElementById(i)
+      rowID = i
+      console.log(i)
       for (let j = 0; j <= coordinates[1]; j++) {
         if (j == coordinates[1]) {
-          column = document.getElementById(rowID.toString() + j);
-          columnID = rowID.toString() + j;
-          console.log(j);
+          column = document.getElementById(rowID.toString() + j)
+          columnID = rowID.toString() + j
+          console.log(j)
         }
       }
-      column.style = "background-color: white;";
+      column.style = "background-color: red;";
     }
   }
 }
 
 function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
+
 function tryMove(dir) {
-  let nextX = coordinates[0];
-  let nextY = coordinates[1];
-
-  if (dir === "up") {
-    nextX -= 1;
-  } else if (dir === "down") {
-    nextX += 1;
-  } else if (dir === "left") {
-    nextY -= 1;
-  } else if (dir === "right") {
-    nextY += 1;
+  let toIncr = 0;
+  if(dir == 'up') {
+      if(coordinates[0] > 0) {
+        column.style = "background-color: black;";
+        coordinates[0] -= 1
+        find()
+      }
+  } else if(dir == 'down') {
+      if(coordinates[0] < 9) {
+        column.style = "background-color: black;";
+        coordinates[0] += 1
+        find()
+      }
+  } else if(dir == 'left') {
+      if(coordinates[1] > 0) {
+        column.style = "background-color: black;";
+        coordinates[1] -= 1
+        find()
+      }
+  } else if(dir == 'right') {
+      if(coordinates[1] < 9) {
+        column.style = "background-color: black;";
+        coordinates[1] += 1
+        find()
+      }
   }
-
-  if (!checkWallCollision(nextX, nextY)) {
-    column.style = "background-color: black;";
-    coordinates[0] = nextX;
-    coordinates[1] = nextY;
-    find();
-  }
-}
-
-function checkWallCollision(nextX, nextY) {
-  for (let i = 0; i < wallCoords.length; i++) {
-    if (wallCoords[i][0] === nextX && wallCoords[i][1] === nextY) {
-      return true;
-    }
-  }
-  return false;
 }
 
 document.onkeypress = (e) => {
-  console.log(e.keyCode);
+  console.log(e.keyCode)
   if (e.keyCode == 115) {
-    tryMove("down");
+    /*if(coordinates[0] < 5) {
+      column.style = "background-color: black;";
+    coordinates[0] += 1
+    find()
+    }*/
+    tryMove('down')
   }
   if (e.keyCode == 119) {
-    tryMove("up");
+    tryMove('up')
   }
   if (e.keyCode == 97) {
-    tryMove("left");
+    tryMove('left')
   }
   if (e.keyCode == 100) {
-    tryMove("right");
+    tryMove('right')
   }
-};
+}
 
 function loop() {
   while (true) {
-    sleep(100);
-    find();
-    findW();
+    sleep(100)
+    find()
+    findH()
     if (true) {
-      break;
+      break
     }
   }
 }
 
-loop();
+loop()
