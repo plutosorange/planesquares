@@ -17,10 +17,10 @@ let wallPosX = 0
 function initMap() {
   for (let y = 0; y < 10; y++) {
     for (let x = 0; x < 10; x++) {
-      gameMap[y][x].push(Math.floor(Math.random() * 8) + 1)
+      gameMap[y][x][0] = Math.floor(Math.random() * 8) + 1;
     }
   }
-  alert(JSON.stringify(gameMap))
+  alert(JSON.stringify(gameMap));
 }
 
 function displayErase() {}
