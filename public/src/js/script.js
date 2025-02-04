@@ -5,6 +5,7 @@ fetch("./public/src/map.json")
   .then(data => {
     gameMap = data;
     initMap();
+    loop();
   });
 let column
 let row
@@ -14,8 +15,8 @@ let wallNegX = 5
 let wallPosX = 0
     
 function initMap() {
-  for(let y = 0; y < 9; y++) {
-    for(let x = 0; x < 9; x++) {
+  for (let y = 0; y < 10; y++) {
+    for (let x = 0; x < 10; x++) {
       gameMap[y][x].push(Math.floor(Math.random() * 8) + 1)
     }
   }
@@ -24,38 +25,20 @@ function initMap() {
 
 function displayErase() {}
 function findH() {
-  for(let y = 0; y < 9; y++) {
-    rowID = y
-    for(let x = 0; x < 9; x++) {
-      column = document.getElementById(rowID.toString() + x)
+  for (let y = 0; y < 10; y++) {
+    for (let x = 0; x < 10; x++) {
+      let cell = document.getElementById(y.toString() + x);
+      if (!cell) continue;
       switch (gameMap[y][x][0]) {
-        case 0:
-          column.style = "background-color: #000"
-          break;
-        case 1:
-          column.style = "background-color: #222"
-          break;
-        case 2:
-          column.style = "background-color: #444"
-          break;
-        case 3:
-          column.style = "background-color: #666"
-          break;
-        case 4:
-          column.style = "background-color: #888"
-          break;
-        case 5:
-          column.style = "background-color: #aaa"
-          break;
-        case 6:
-          column.style = "background-color: #ccc"
-          break;
-        case 7:
-          column.style = "background-color: #eee"
-          break;
-        case 8:
-          column.style = "background-color: #fff"
-          break;
+        case 0: cell.style.backgroundColor = "#000"; break;
+        case 1: cell.style.backgroundColor = "#222"; break;
+        case 2: cell.style.backgroundColor = "#444"; break;
+        case 3: cell.style.backgroundColor = "#666"; break;
+        case 4: cell.style.backgroundColor = "#888"; break;
+        case 5: cell.style.backgroundColor = "#aaa"; break;
+        case 6: cell.style.backgroundColor = "#ccc"; break;
+        case 7: cell.style.backgroundColor = "#eee"; break;
+        case 8: cell.style.backgroundColor = "#fff"; break;
       }
     }
   }
@@ -126,5 +109,3 @@ function loop() {
     }
   }
 }
-
-loop()
