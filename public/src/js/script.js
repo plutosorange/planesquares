@@ -58,25 +58,25 @@ function tryMove(dir) {
   let toIncr = 0;
   if(dir == 'up') {
       if(coordinates[0] > 0) {
-        column.style = "background-color: black;";
+        findH()
         coordinates[0] -= 1
         find()
       }
   } else if(dir == 'down') {
       if(coordinates[0] < 9) {
-        column.style = "background-color: black;";
+        findH()
         coordinates[0] += 1
         find()
       }
   } else if(dir == 'left') {
       if(coordinates[1] > 0) {
-        column.style = "background-color: black;";
+        findH()
         coordinates[1] -= 1
         find()
       }
   } else if(dir == 'right') {
       if(coordinates[1] < 9) {
-        column.style = "background-color: black;";
+        findH()
         coordinates[1] += 1
         find()
       }
