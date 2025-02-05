@@ -17,7 +17,7 @@ let wallPosX = 0
 const noise = new Noise(Math.random());
 
 function initMap() {
-  const scale = 0.1;
+  const scale = 0.3;
   
   for (let y = 0; y < 10; y++) {
     for (let x = 0; x < 10; x++) {
