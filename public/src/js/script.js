@@ -13,15 +13,23 @@ let columnID
 let rowID
 let wallNegX = 5
 let wallPosX = 0
-    
+
+noise.seed(Math.random());
+
 function initMap() {
+  const scale = 0.1;
+  
   for (let y = 0; y < 10; y++) {
     for (let x = 0; x < 10; x++) {
-      gameMap[y][x][0] = Math.floor(Math.random() * 8) + 1;
+      let noiseVal = noise.perlin2(x * scale, y * scale);
+      noiseVal = (noiseVal + 1) / 2;
+      let height = Math.floor(noiseVal * 8);
+      gameMap[y][x][0] = height;
     }
   }
   alert(JSON.stringify(gameMap));
 }
+
 
 function displayErase() {}
 function findH() {
