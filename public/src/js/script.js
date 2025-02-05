@@ -55,32 +55,49 @@ function sleep(ms) {
 }
 
 function tryMove(dir) {
-  let toIncr = 0;
-  if(dir == 'up') {
-      if(coordinates[0] > 0) {
-        findH()
-        coordinates[0] -= 1
-        find()
-      }
-  } else if(dir == 'down') {
-      if(coordinates[0] < 9) {
-        findH()
-        coordinates[0] += 1
-        find()
-      }
-  } else if(dir == 'left') {
-      if(coordinates[1] > 0) {
-        findH()
-        coordinates[1] -= 1
-        find()
-      }
-  } else if(dir == 'right') {
-      if(coordinates[1] < 9) {
-        findH()
-        coordinates[1] += 1
-        find()
-      }
+  let currentRow = coordinates[0];
+  let currentCol = coordinates[1];
+  
+  let targetRow = currentRow;
+  let targetCol = currentCol;
+  if (dir === "up" && currentRow > 0) {
+    targetRow--;
+  } else if (dir === "down" && currentRow < 9) {
+    targetRow++;
+  } else if (dir === "left" && currentCol > 0) {
+    targetCol--;
+  } else if (dir === "right" && currentCol < 9) {
+    targetCol++;
+  } else {
+    return;
   }
+  
+  let currentHeight = gameMap[currentRow][currentCol][0];
+  let targetHeight = gameMap[targetRow][targetCol][0];
+  
+  if (Math.abs(targetHeight - currentHeight) > 1) {
+    console.log(`Can't move from z=${currentHeight} to z=${targetHeight}! Too steep!`);
+    return;
+  }
+  
+  let prevCell = document.getElementById(currentRow.toString() + currentCol);
+  if (prevCell) {
+    switch (currentHeight) {
+      case 0: prevCell.style.backgroundColor = "#000"; break;
+      case 1: prevCell.style.backgroundColor = "#222"; break;
+      case 2: prevCell.style.backgroundColor = "#444"; break;
+      case 3: prevCell.style.backgroundColor = "#666"; break;
+      case 4: prevCell.style.backgroundColor = "#888"; break;
+      case 5: prevCell.style.backgroundColor = "#aaa"; break;
+      case 6: prevCell.style.backgroundColor = "#ccc"; break;
+      case 7: prevCell.style.backgroundColor = "#eee"; break;
+      case 8: prevCell.style.backgroundColor = "#fff"; break;
+    }
+  }
+  
+  coordinates[0] = targetRow;
+  coordinates[1] = targetCol;
+  find();
 }
 
 document.onkeypress = (e) => {
