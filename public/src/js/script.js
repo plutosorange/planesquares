@@ -58,6 +58,7 @@ function findH() {
 }
 
 function updateTile(x, y, height) {
+  console.log(`Tile at (${x}, ${y}) set to height ${height}`);
   let cell = document.getElementById(y.toString() + x);
   if (!cell) return;
 
