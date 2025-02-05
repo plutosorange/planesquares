@@ -130,8 +130,8 @@ document.onkeypress = (e) => {
 function loop() {
   while (true) {
     sleep(100)
-    find()
     findH()
+    find()
     if (true) {
       break
     }
