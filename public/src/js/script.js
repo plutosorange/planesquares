@@ -62,7 +62,7 @@ function updateTile(x, y, height) {
   let cell = document.getElementById(y.toString() + x);
   if (!cell) return;
 
-  cell.className = `tile height-${height}`;
+  cell.className += `tile height-${height}`;
 }
 
 
