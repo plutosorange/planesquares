@@ -28,6 +28,7 @@ function initMap() {
       let height = Math.floor(noiseVal * 8);
       
       gameMap[y][x][0] = height;
+      updateTile(x,y,height)
     }
   }
   alert(JSON.stringify(gameMap));
@@ -35,6 +36,7 @@ function initMap() {
 
 
 function displayErase() {}
+
 function findH() {
   for (let y = 0; y < 10; y++) {
     for (let x = 0; x < 10; x++) {
@@ -54,6 +56,15 @@ function findH() {
     }
   }
 }
+
+function updateTile(x, y, height) {
+  let cell = document.getElementById(y.toString() + x);
+  if (!cell) return;
+
+  cell.className = `tile height-${height}`;
+}
+
+
 function find() {
   const rowID = coordinates[0];
   const columnID = coordinates[1];
