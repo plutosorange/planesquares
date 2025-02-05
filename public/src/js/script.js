@@ -1,5 +1,6 @@
 const coordinates = [0, 1, 1]
 let gameMap
+import noisejs from "./public/src/js/noise.js"
 fetch("./public/src/map.json")
   .then(response => response.json())
   .then(data => {
