@@ -12,58 +12,86 @@
   <body>
     <style>
       .container {
-        margin-top: 10%;
-        width: 50%;
-        height: 50%;
-        transform: perspective(500px) rotateX(45deg);
-      }
+  margin-top: 10%;
+  width: 50%;
+  height: 50%;
+  perspective: 1000px;
+  transform: rotateX(15deg);
+}
 
-      .tile {
-        position: relative;
-        width: 30px;
-        height: 30px;
-        transform-style: preserve-3d;
-      }
+.tile {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  transform-style: preserve-3d;
+}
 
-      .tile::before, .tile::after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
+.tile::before,
+.tile::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 
-      .tile::before {
-        background: rgba(255, 255, 255, 0.3);
-        transform: rotateX(90deg) translateZ(15px);
-      }
+.tile::before {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotateX(90deg) translateZ(15px);
+}
 
-      .tile::after {
-        background: rgba(0, 0, 0, 0.2);
-        transform: rotateY(90deg) translateZ(15px);
-      }
+.tile::after {
+  background: rgba(0, 0, 0, 0.2);
+  transform: rotateY(90deg) translateZ(15px);
+}
 
-      .tile.height-0 { transform: translateZ(0px); }
-      .tile.height-1 { transform: translateZ(50px); }
-      .tile.height-2 { transform: translateZ(100px); }
-      .tile.height-3 { transform: translateZ(150px); }
-      .tile.height-4 { transform: translateZ(200px); }
-      .tile.height-5 { transform: translateZ(250px); }
-      .tile.height-6 { transform: translateZ(300px); }
-      .tile.height-7 { transform: translateZ(350px); }
-      .tile.height-8 { transform: translateZ(400px); }
+/* Height Transformations */
+.tile.height-0 {
+  transform: translateZ(0px);
+}
 
-      .col {
-        display: flex;
-        width: 50px;
-        height: 50px;
-        margin: 0;
-        background-color: black;
-      }
+.tile.height-1 {
+  transform: translateZ(50px);
+}
 
-      .row {
-        display: flex;
-        margin: 0.5px;
-      }
+.tile.height-2 {
+  transform: translateZ(100px);
+}
+
+.tile.height-3 {
+  transform: translateZ(150px);
+}
+
+.tile.height-4 {
+  transform: translateZ(200px);
+}
+
+.tile.height-5 {
+  transform: translateZ(250px);
+}
+
+.tile.height-6 {
+  transform: translateZ(300px);
+}
+
+.tile.height-7 {
+  transform: translateZ(350px);
+}
+
+.tile.height-8 {
+  transform: translateZ(400px);
+}
+
+.col {
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  background-color: black;
+}
+
+.row {
+  margin: 0.5px;
+}
+.row, .col {transform-style: preserve-3d;}
     </style>
     
     <div class="container">
