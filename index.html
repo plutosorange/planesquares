@@ -1,72 +1,66 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-  </head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Terrain Grid</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+    }
+    .container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      perspective: 1000px;
+      transform: rotateX(60deg) rotateZ(45deg);
+      transform-style: preserve-3d;
+      background: #fff;
+      border: 1px solid #ccc;
+    }
+    .tile {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      transform-style: preserve-3d;
+    }
+    .tile .face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+    .face.top {
+      background: rgba(150, 150, 150, 0.8);
+      transform: rotateX(90deg) translateZ(15px);
+    }
+    .face.left {
+      background: rgba(120, 120, 120, 0.8);
+      transform: rotateY(-90deg) translateZ(15px);
+    }
+    .face.right {
+      background: rgba(180, 180, 180, 0.8);
+      transform: translateZ(15px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="grid"></div>
 
-  <body>
-    <style>
-      .container {
-  margin-top: 10%;
-  width: 50%;
-  height: 50%;
-  perspective: 1000px;
-  transform: rotateX(15deg);
-}
-
-.tile {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  transform-style: preserve-3d;
-}
-
-/* Height Transformations */
-.tile.height-0 { transform: translateZ(0px); z-index: 0; }
-.tile.height-1 { transform: translateZ(50px); z-index: 1; }
-.tile.height-2 { transform: translateZ(100px); z-index: 2; }
-.tile.height-3 { transform: translateZ(150px); z-index: 3; }
-.tile.height-4 { transform: translateZ(200px); z-index: 4; }
-.tile.height-5 { transform: translateZ(250px); z-index: 5; }
-.tile.height-6 { transform: translateZ(300px); z-index: 6; }
-.tile.height-7 { transform: translateZ(350px); z-index: 7; }
-.tile.height-8 { transform: translateZ(400px); z-index: 8; }
-
-.col {
-  width: 50px;
-  height: 50px;
-  margin: 0;
-  background-color: black;
-}
-
-.row {
-  margin: 0.5px;
-}
-.row, .col {transform-style: preserve-3d;}
-    </style>
-    
-    <div class="container">
-      <script>
-        for (let i = 0; i < 10; i++) {
-          document.write(`<div class="row" id="${i}">`);
-          for (let j = 0; j < 10; j++) {
-            document.write(`<div class="col" id="${i}${j}"></div>`);
-          }
-          document.write(`</div>`);
-        }
-      </script>
-    </div>
-    
-    <script src="./public/src/js/noise.js"></script>
-    <script src="./public/src/js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/appwrite@15.0.0"></script>
-    <script>
-        const { Client } = Appwrite;
-    </script>
-  </body>
+  <script src="./public/src/js/noise.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@15.0.0"></script>
+  <script src="./public/src/js/script.js></script>
+</body>
 </html>
