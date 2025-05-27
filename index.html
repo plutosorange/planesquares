@@ -7,92 +7,101 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <style>
+      .container {
+        margin-top: 10%;
+        width: 50%;
+        height: 50%;
+        perspective: 1000px;
+        transform: rotateX(15deg);
+      }
+
+      .tile {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        transform-style: preserve-3d;
+      }
+
+      /* Height Transformations */
+      .tile.height-0 {
+        transform: translateZ(0px);
+      }
+
+      .tile.height-1 {
+        transform: translateZ(50px);
+      }
+
+      .tile.height-2 {
+        transform: translateZ(100px);
+      }
+
+      .tile.height-3 {
+        transform: translateZ(150px);
+      }
+
+      .tile.height-4 {
+        transform: translateZ(200px);
+      }
+
+      .tile.height-5 {
+        transform: translateZ(250px);
+      }
+
+      .tile.height-6 {
+        transform: translateZ(300px);
+      }
+
+      .tile.height-7 {
+        transform: translateZ(350px);
+      }
+
+      .tile.height-8 {
+        transform: translateZ(400px);
+      }
+
+      .col {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        background-color: black;
+      }
+
+      .row {
+        margin: 0.5px;
+      }
+
+      .row,
+      .col {
+        transform-style: preserve-3d;
+      }
+    </style>
   </head>
 
   <body>
-    <style>
-      .container {
-  margin-top: 10%;
-  width: 50%;
-  height: 50%;
-  perspective: 1000px;
-  transform: rotateX(15deg);
-}
+    <div class="container" id="grid"></div>
 
-.tile {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  transform-style: preserve-3d;
-}
-
-/* Height Transformations */
-.tile.height-0 {
-  transform: translateZ(0px);
-}
-
-.tile.height-1 {
-  transform: translateZ(50px);
-}
-
-.tile.height-2 {
-  transform: translateZ(100px);
-}
-
-.tile.height-3 {
-  transform: translateZ(150px);
-}
-
-.tile.height-4 {
-  transform: translateZ(200px);
-}
-
-.tile.height-5 {
-  transform: translateZ(250px);
-}
-
-.tile.height-6 {
-  transform: translateZ(300px);
-}
-
-.tile.height-7 {
-  transform: translateZ(350px);
-}
-
-.tile.height-8 {
-  transform: translateZ(400px);
-}
-
-.col {
-  width: 50px;
-  height: 50px;
-  margin: 0;
-  background-color: black;
-}
-
-.row {
-  margin: 0.5px;
-}
-.row, .col {transform-style: preserve-3d;}
-    </style>
-    
-    <div class="container">
-      <script>
-        for (let i = 0; i < 10; i++) {
-          document.write(<div class="row" id="${i}">);
-          for (let j = 0; j < 10; j++) {
-            document.write(<div class="col" id="${i}${j}"></div>);
-          }
-          document.write(</div>);
+    <script>
+      const container = document.getElementById("grid");
+      for (let i = 0; i < 10; i++) {
+        const row = document.createElement("div");
+        row.classList.add("row");
+        row.id = i;
+        for (let j = 0; j < 10; j++) {
+          const col = document.createElement("div");
+          col.classList.add("col", "tile");
+          col.id = `${i}${j}`;
+          row.appendChild(col);
         }
-      </script>
-    </div>
-    
+        container.appendChild(row);
+      }
+    </script>
+
     <script src="./public/src/js/noise.js"></script>
     <script src="./public/src/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@15.0.0"></script>
     <script>
-        const { Client } = Appwrite;
+      const { Client } = Appwrite;
     </script>
   </body>
 </html>
