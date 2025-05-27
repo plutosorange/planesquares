@@ -25,7 +25,7 @@
       width: 500px;
       height: 500px;
       perspective: 1000px;
-      transform: rotateX(15deg) rotateZ(15deg);
+      transform: rotateZ(15deg);
       transform-style: preserve-3d;
       background: #fff;
       border: 1px solid #ccc;
@@ -57,8 +57,20 @@
   </style>
 </head>
 <body>
-  <div class="container" id="grid"></div>
-
+  <div class="container" id="grid">
+    
+  </div>
+  <script>
+    const gridContainer = document.getElementById('grid');
+    for (let y = 0; y < 10; y++) {
+      for (let x = 0; x < 10; x++) {
+        const tile = document.createElement('div');
+        tile.id = `${y}${x}`;
+        tile.classList.add('tile');
+        gridContainer.appendChild(tile);
+      }
+    }
+  </script>
   <script src="./public/src/js/noise.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/appwrite@15.0.0"></script>
   <script src="./public/src/js/script.js"></script>
