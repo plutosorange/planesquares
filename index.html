@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <title>3D Tile Grid</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -10,10 +8,6 @@
       crossorigin="anonymous"
     />
     <style>
-      body {
-        background-color: #222;
-      }
-
       .container {
         margin-top: 10%;
         width: 50%;
@@ -27,51 +21,59 @@
         width: 30px;
         height: 30px;
         transform-style: preserve-3d;
-        will-change: transform;
-        background-color: black;
       }
 
       /* Height Transformations */
       .tile.height-0 {
-        transform: translateZ(0px) rotateX(0deg);
+        transform: translateZ(0px);
+        z-index: 0;
       }
 
       .tile.height-1 {
-        transform: translateZ(50px) rotateX(0deg);
+        transform: translateZ(50px);
+        z-index: 1;
       }
 
       .tile.height-2 {
-        transform: translateZ(100px) rotateX(0deg);
+        transform: translateZ(100px);
+        z-index: 2;
       }
 
       .tile.height-3 {
-        transform: translateZ(150px) rotateX(0deg);
+        transform: translateZ(150px);
+        z-index: 3;
       }
 
       .tile.height-4 {
-        transform: translateZ(200px) rotateX(0deg);
+        transform: translateZ(200px);
+        z-index: 4;
       }
 
       .tile.height-5 {
-        transform: translateZ(250px) rotateX(0deg);
+        transform: translateZ(250px);
+        z-index: 5;
       }
 
       .tile.height-6 {
-        transform: translateZ(300px) rotateX(0deg);
+        transform: translateZ(300px);
+        z-index: 6;
       }
 
       .tile.height-7 {
-        transform: translateZ(350px) rotateX(0deg);
+        transform: translateZ(350px);
+        z-index: 7;
       }
 
       .tile.height-8 {
-        transform: translateZ(400px) rotateX(0deg);
+        transform: translateZ(400px);
+        z-index: 8;
       }
 
       .col {
         width: 50px;
         height: 50px;
         margin: 0;
+        background-color: black;
       }
 
       .row {
@@ -97,11 +99,6 @@
         for (let j = 0; j < 10; j++) {
           const col = document.createElement("div");
           col.classList.add("col", "tile");
-
-          // Apply a random height class
-          const height = Math.floor(Math.random() * 9);
-          col.classList.add(`height-${height}`);
-
           col.id = `${i}${j}`;
           row.appendChild(col);
         }
