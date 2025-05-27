@@ -58,12 +58,11 @@ function findH() {
 }
 
 function updateTile(x, y, height) {
-  console.log(`Tile at (${x}, ${y}) set to height ${height}`);
+  console.log(Tile at (${x}, ${y}) set to height ${height});
   let cell = document.getElementById(y.toString() + x);
   if (!cell) return;
 
-  cell.classList.add("tile", `height-${height}`);
-  cell.style.zIndex = height;
+  cell.classList.add("tile", height-${height});
 }
 
 
@@ -100,7 +99,7 @@ function tryMove(dir) {
   let targetHeight = gameMap[targetRow][targetCol][0];
   
   if (Math.abs(targetHeight - currentHeight) > 1) {
-    console.log(`Can't move from z=${currentHeight} to z=${targetHeight}! Too steep!`);
+    console.log(Can't move from z=${currentHeight} to z=${targetHeight}! Too steep!);
     return;
   }
   
