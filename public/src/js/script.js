@@ -63,6 +63,7 @@ function updateTile(x, y, height) {
   if (!cell) return;
 
   cell.classList.add("tile", `height-${height}`);
+  cell.style.zIndex = height;
 }
 
 
